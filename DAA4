@@ -1,0 +1,44 @@
+import time
+import random
+import matplotlib.pyplot as plt
+
+def selection_sort(a):
+    n=len(a)
+    for i in range(n-1):
+        min_index=i
+        for j in range(i+1,n):
+            if a[j]<a[min_index]:
+                min_index=j
+        a[i],a[min_index]=a[min_index],a[i]
+    return a
+                
+
+def main():
+    n_values=[]
+    times=[]
+    r=int(input("Enter the number of runs:"))
+    for i in range(r):
+        n=int(input("Enter the number of element:"))
+        a=[random.randint(0,1000)for _ in range(n)]
+        repeat=10000
+        start=time.time()
+        for _ in range(repeat):
+            result=selection_sort(a)
+        end=time.time()
+        time_taken=(end-start)*1000
+        print(f"Time_taken to sort an array is {time_taken}=milli seconds")
+        print(f"Sorted array:",result)
+        n_values.append(n)
+        times.append(time_taken)
+        
+    
+    plt.figure()
+    plt.plot(n_values,times,'o-')
+    plt.xlabel("N size of array")
+    plt.ylabel("Time taken in milliseconds")
+    plt.title("Selection sort")
+    plt.grid(True)
+    plt.show()
+    
+    
+main()  
