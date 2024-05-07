@@ -1,0 +1,42 @@
+import matplotlib.pyplot as plt
+import time
+
+
+def linser(a,n,key):
+    for i in range(n):
+        if a[i]==key:
+            return i
+    return -1
+
+def main():
+    n_values=[]
+    times=[]
+    r=int(input("Enter the number of runs:"))
+    for _ in range(r):
+        n=int(input("Enter the number of elements:"))
+        a=list(map(int,input("Enter the elements:").split()))
+        key=int(input("Enter the element to be searched:"))
+        repeat=10000
+        start_time=time.time()
+        for _ in range(repeat):
+             result=linser(a,n,key)
+        end_time=time.time()
+        if result!=-1:
+            print(f"Element {key} is found at location {result}")
+        else:
+            print(f"Element {key} is not found")
+        time_taken=(end_time-start_time)*1000
+        print(f"Time taken to searched the element:{time_taken}=milliseconds")
+        n_values.append(n)
+        times.append(time_taken)
+    #ploting
+    plt.figure()
+    plt.plot(n_values,times,"-o")
+    plt.xlabel("n elements of array")
+    plt.ylabel("Time taken")
+    plt.title("Linear searched")
+    plt.grid(True)
+    plt.show()
+
+
+main()
