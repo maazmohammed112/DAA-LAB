@@ -1,0 +1,43 @@
+import time
+import matplotlib
+def binary_search(a,low,high,key):
+    while low<=high:
+        mid=low+(high-low)//2
+        if a[mid]==key:
+            return mid
+        if a[mid]<key:
+            low=mid+1
+        else:
+            high=mid-1
+    return -1
+def main():
+    n_values=[]
+    times=[]
+    r=int(input("Enter the number of runs:"))
+    for i in range(r):
+        n=int(input("Enter the size of array:"))
+        a=list(map(int,input("Enter the elements of array:").split()))
+        key=int(input("Enter the element to be searched:"))
+        repeat=1000
+        start=time.time()
+        for j in range(repeat):
+            result=binary_search(a,0,n-1,key)
+        end=time.time()
+        if result!=-1:
+            print(f"Element {key} has found in the location {result}")
+        else:
+            print(f"Element {key} has not found in the array")
+        time_taken=(end-start)*1000
+        print(f"Time taken to searched the element {time_taken}=milliseconds")
+        n_values.append(n)
+        times.append(time_taken)
+        
+        plt.figure()
+        plt.plot(n_values,times,"o-")
+        plt.xlabel("Size of array[n]")
+        plt.ylabel("Time taken[milliseconds]")
+        plt.title("Binary search")
+        plt.grid(True)
+        plt.show()
+        
+main()
