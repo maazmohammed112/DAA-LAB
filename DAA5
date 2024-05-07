@@ -1,0 +1,18 @@
+def brute(a,n):
+    result=1
+    
+    for i in range(n):
+        result*=a
+    return result
+def divconq(a,n):
+    if n==0:
+        return 1
+    elif n%2==0:
+        return divconq(a*a,n//2)
+    else:
+        return a*divconq(a*a,n//2)
+a,n=map(int,input("Enter the value for a & n:").split())
+result_brute=brute(a,n)
+result_divconq=divconq(a,n)
+print("Result for brute force:",result_brute)
+print("Result for Divide and conquer:",result_divconq)
