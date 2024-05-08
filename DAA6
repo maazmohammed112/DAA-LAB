@@ -1,0 +1,48 @@
+import time 
+import matplotlib.pyplot as plt
+
+def part(a,low,high):
+    i=(low-1)
+    pivot=a[high]
+    for j in range(low,high):
+        if a[j]<=pivot:
+            i+=1
+            a[i],a[j]=a[j],a[i]
+    
+    a[i+1],a[high]=a[high],a[i+1]
+    return (i+1)
+def quicksort(a,low,high):
+    if low<high:
+        pi=part(a,low,high)
+        quicksort(a,low,pi-1)
+        quicksort(a,pi+1,high)
+
+def main():
+    n_values=[]
+    times=[]
+    r=int(input("Enter the number of runs:"))
+    for _ in range(r):
+        n=int(input("Enter the number of element:"))
+        a=list(map(int,input("Enter the elements:").split()))
+        print("Elements before sorting:",a)
+        repeat=10000
+        start=time.time()
+        for _ in range(repeat):
+            result=quicksort(a,0,n-1)
+        end=time.time()
+        print("Elements after sorted:",a)
+        time_taken=(end-start)*1000
+        print(f"Time taken to sort the array {time_taken}=milliseconds")
+        n_values.append(n)
+        times.append(time_taken)
+        
+    plt.figure()
+    plt.plot(n_values,times,"o-")
+    plt.xlabel("N values")
+    plt.ylabel("Time taken")
+    plt.title("Quick sort")
+    plt.grid(True)
+    plt.show()
+    
+main()
+            
