@@ -1,0 +1,23 @@
+import time #program 7 (maaz)
+def brute(co,x):
+    result=0
+    for i in range(len(co)):
+        result+=co[i]*(x**i)
+    return result
+def horner(co,x):
+    result=0
+    for i in reversed(co):
+        result=result*x+i
+    return result
+co=list(map(int,input("Enter the coefficients:").split()))
+x=int(input("Enter the x value:"))
+start=time.time()
+print("Brute:",brute(co,x))
+end=time.time()
+time_taken=(end-start)*1000
+print(f"Time taken in Brute:{time_taken}")
+start=time.time()
+print("Horner:",horner(co,x))
+end=time.time()
+time_taken=(end-start)*1000
+print(f"Time taken in Horner's:{time_taken}")
