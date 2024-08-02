@@ -1,0 +1,18 @@
+def boyer(text,pattern): #PROGRAM 9
+    m,n=len(pattern),len(text)
+    i,j=0,m-1
+    while i<= n-m:
+        while j>=0 and pattern[j]==text[i+j]:
+            j-=1
+        if j<=0:
+            return i
+        else:
+            i+=max(1,j-ord(text[i+j]))
+text=input("Enter the Text:")
+pattern=input("Enter the Pattern:")
+result=boyer(text,pattern)
+if result!=-1:
+    print(f"Pattern has found at index {result}")
+else:
+    print("Pattern not found")
+    
